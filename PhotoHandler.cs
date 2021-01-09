@@ -13,7 +13,7 @@ namespace MonitorPhotoApp
     class PhotosHandler
     {
         public ImageList ImageList { get; private set; }
-        public List<Bitmap> BitMapList { get; private set; }
+        public List<Bitmap> BitMapList { private get; private set; }
         public ImageList GetImageList(List<PhotoInfo> photoInfoList)
         {
             this.ImageList = new ImageList();
@@ -36,17 +36,13 @@ namespace MonitorPhotoApp
             return this.ImageList;
         }
 
-        public Color getPicturesAvrColor(int picIndex)
+        private Color GetPicturesAvrColor(int picIndex)
         {
-            return PictureAnalyzer.GetMostUsedColor(this.BitMapList[picIndex]);
+            return GetMostUsedColor(this.BitMapList[picIndex]);
            
         }
-    }
 
-    class PictureAnalyzer
-    {
-    
-        public static Color GetMostUsedColor(Bitmap bmp)
+        public Color GetMostUsedColor(Bitmap bmp)
         {
 
             //Used for tally
@@ -77,6 +73,5 @@ namespace MonitorPhotoApp
 
             return Color.FromArgb(r, g, b);
         }
-
     }
 }

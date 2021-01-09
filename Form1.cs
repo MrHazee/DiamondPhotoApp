@@ -17,31 +17,22 @@ namespace MonitorPhotoApp
 		private PhotosHandler _PhotosHandler;
 		private LocaleData _locationWeather;
 
-		
-
-			
-		    
 		public Form1()
 		{
 	
 			InitializeComponent();
 
-				_PhotosHandler = new PhotosHandler();
-				_locationWeather = new LocaleData();
+			_PhotosHandler = new PhotosHandler();
+			_locationWeather = new LocaleData();
 
-
-
-
-				_pgDB = new MyDataBaseClass();
-				_pgDB.OnUpdateStatus += new MyDataBaseClass.StatusUpdateHandler(UpdateData);
-				_pgDB.connectToDB();
+			_pgDB = new MyDataBaseClass();
+			_pgDB.OnUpdateStatus += new MyDataBaseClass.StatusUpdateHandler(UpdateAndShowPhotoPanels);
+			_pgDB.connectToDB();
 			
-			//funnyQueryPanel.BackColor = Color.FromArgb(144, 69, 69, 98);
-
 		}
 
      
-        private void UpdateData(object sender, ProgressEventArgs e)
+        private void UpdateAndShowPhotoPanels(object sender, ProgressEventArgs e)
         {
 			listView1.Clear();
 			
@@ -50,10 +41,11 @@ namespace MonitorPhotoApp
 				listView1.Items.Add("", i);
 			}
 			listView1.LargeImageList = _PhotosHandler.GetImageList(_pgDB.PhotosInfoList);
+
 			if (this.listView1.Items.Count > 0)
 			{
 				this.listView1.Items[0].Selected = true;
-				pictureBox1.BackColor = _PhotosHandler.getPicturesAvrColor(0);
+				pictureBox1.BackColor = _PhotosHandler.GetPicturesAvrColor(0);
 			}
             else
             {
@@ -74,27 +66,34 @@ namespace MonitorPhotoApp
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 		}
 
-        private void extractAllPhotos_Click(object sender, EventArgs e)
-        {
-			
-			
-
-			this.queryDatabase(PhotoAttribute.all);
-		}
-
-		private void extractFunnyPhotos_Click(object sender, EventArgs e)
+		private void MenuBtn_Clicked(object sender, EventArgs e)
 		{
-			this.queryDatabase(PhotoAttribute.funny);
-
-		}
-
-		private void queryDatabase(PhotoAttribute attr)
-		{
-			
 
 			this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+			Button btn = sender as Button;
 
-			_pgDB.extractDataFromDB(attr);
+			if (btn == allPhotosBtn)
+			{
+				_pgDB.extractDataFromDB(PhotoAttribute.all);
+			}
+			else if (btn == funnyPicsBtn)
+			{
+				_pgDB.extractDataFromDB(PhotoAttribute.funny);
+			}
+			else if (btn == locationInfoBtn) {
+
+				_locationWeather.FillWeatherProperties();
+				UpdateLocationInfo();
+
+				ipPanel.Visible = true;
+				infoPane.Visible = true;
+				pictureBox1.Visible = false;
+				listView1.Visible = false;
+				funnyPanel.Visible = false;
+
+			}
+
+
 		}
 
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +102,7 @@ namespace MonitorPhotoApp
 			if (indexes.Count > 0)
             {
 				pictureBox1.Load(_pgDB.PhotosInfoList[indexes[0]].URL);
-				pictureBox1.BackColor = _PhotosHandler.getPicturesAvrColor(indexes[0]);
+				pictureBox1.BackColor = _PhotosHandler.GetPicturesAvrColor(indexes[0]);
 				
 				if (_pgDB.PhotosInfoList[indexes[0]].IsFunny){
 					radioButtonYes.Checked = true;
@@ -115,23 +114,8 @@ namespace MonitorPhotoApp
 			}
 
 		}
-        private void buttonsStats_Click(object sender, EventArgs e)
-        {
 
-			_locationWeather.FillWeatherProperties();
-			UpdateUi();
-
-			ipPanel.Visible = true;
-            infoPane.Visible = true;
-			pictureBox1.Visible = false;
-			listView1.Visible = false;
-			funnyPanel.Visible = false;
-
-			
-
-		}
-
-		private void ipTextBox_KeyDown(object sender, KeyEventArgs e)
+		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
 			
 			ipTextBox.ForeColor = Color.Black;
@@ -142,7 +126,7 @@ namespace MonitorPhotoApp
 				if (IPAddress.TryParse(userIp, out _))
                 {
 					_locationWeather.FillWeatherProperties(userIp);
-					UpdateUi();
+					UpdateLocationInfo();
 				}
 				else
 				{
@@ -153,13 +137,12 @@ namespace MonitorPhotoApp
             
 			}
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void ClockTimer_Tick(object sender, EventArgs e)
         {
-
 			localTimeLabelVal.Text = _locationWeather.getLocalTime();
 
 		}
-		private void UpdateUi()
+		private void UpdateLocationInfo()
 		{
 			
 			gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(_locationWeather._Lat), double.Parse(_locationWeather._Lon));
@@ -188,13 +171,13 @@ namespace MonitorPhotoApp
 
 			localClockTimer.Start();
 		}
-		private void gMapControl1_Load(object sender, EventArgs e)
+		private void GMapControl1_Load(object sender, EventArgs e)
         {
 			gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;
 			gMapControl1.Zoom = gMapControl1.MaxZoom / 2;
 			gMapControl1.MouseWheelZoomEnabled = true;
 		}
-        private void zoomInBtn_Click(object sender, EventArgs e)
+        private void ZoomInBtn_Click(object sender, EventArgs e)
         {
 			if (gMapControl1.Zoom < gMapControl1.MaxZoom)
 			{
@@ -203,7 +186,7 @@ namespace MonitorPhotoApp
 			}
 		}
 
-        private void zoomOutBtn_Click(object sender, EventArgs e)
+        private void ZoomOutBtn_Click(object sender, EventArgs e)
         {
 			if (gMapControl1.Zoom > gMapControl1.MinZoom)
 			{
@@ -213,7 +196,7 @@ namespace MonitorPhotoApp
 			}
 		}
 
-		private void radioButtons_CheckedChanged(object sender, EventArgs e)
+		private void RadioButtons_CheckedChanged(object sender, EventArgs e)
 		{
 			RadioButton radioButton = sender as RadioButton;
 			List<int> indexes = listView1.SelectedIndices.Cast<int>().ToList();
@@ -231,11 +214,11 @@ namespace MonitorPhotoApp
 			}
 		}
 
-        private void getMyIpBtn_Click(object sender, EventArgs e)
+        private void GetMyIpBtn_Click(object sender, EventArgs e)
         {
 			_locationWeather.FillWeatherProperties();
 			ipTextBox.Text = _locationWeather._IP;
-			UpdateUi();
+			UpdateLocationInfo();
 		}
 
     }

@@ -39,13 +39,14 @@ namespace MonitorPhotoApp
             this.panelSide = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonsStats = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.showPhotos = new System.Windows.Forms.Button();
+            this.locationInfoBtn = new System.Windows.Forms.Button();
+            this.funnyPicsBtn = new System.Windows.Forms.Button();
+            this.allPhotosBtn = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.m = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.ipPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.getMyIpBtn = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
@@ -97,7 +98,6 @@ namespace MonitorPhotoApp
             this.countryLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.localClockTimer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.panelSide.SuspendLayout();
             this.panel2.SuspendLayout();
             this.m.SuspendLayout();
@@ -123,9 +123,9 @@ namespace MonitorPhotoApp
             // 
             this.panelSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(88)))));
             this.panelSide.Controls.Add(this.panel2);
-            this.panelSide.Controls.Add(this.buttonsStats);
-            this.panelSide.Controls.Add(this.button1);
-            this.panelSide.Controls.Add(this.showPhotos);
+            this.panelSide.Controls.Add(this.locationInfoBtn);
+            this.panelSide.Controls.Add(this.funnyPicsBtn);
+            this.panelSide.Controls.Add(this.allPhotosBtn);
             this.panelSide.Controls.Add(this.panelLogo);
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSide.Location = new System.Drawing.Point(0, 0);
@@ -156,61 +156,63 @@ namespace MonitorPhotoApp
             this.textBox1.Size = new System.Drawing.Size(200, 314);
             this.textBox1.TabIndex = 0;
             // 
-            // buttonsStats
+            // locationInfoBtn
             // 
-            this.buttonsStats.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonsStats.FlatAppearance.BorderSize = 0;
-            this.buttonsStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonsStats.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonsStats.Image = ((System.Drawing.Image)(resources.GetObject("buttonsStats.Image")));
-            this.buttonsStats.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonsStats.Location = new System.Drawing.Point(0, 200);
-            this.buttonsStats.Name = "buttonsStats";
-            this.buttonsStats.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.buttonsStats.Size = new System.Drawing.Size(200, 60);
-            this.buttonsStats.TabIndex = 4;
-            this.buttonsStats.Text = "Location Info";
-            this.buttonsStats.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonsStats.UseVisualStyleBackColor = true;
-            this.buttonsStats.Click += new System.EventHandler(this.buttonsStats_Click);
+            this.locationInfoBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.locationInfoBtn.FlatAppearance.BorderSize = 0;
+            this.locationInfoBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.locationInfoBtn.ForeColor = System.Drawing.Color.Gainsboro;
+            this.locationInfoBtn.Image = ((System.Drawing.Image)(resources.GetObject("locationInfoBtn.Image")));
+            this.locationInfoBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.locationInfoBtn.Location = new System.Drawing.Point(0, 200);
+            this.locationInfoBtn.Name = "locationInfoBtn";
+            this.locationInfoBtn.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.locationInfoBtn.Size = new System.Drawing.Size(200, 60);
+            this.locationInfoBtn.TabIndex = 4;
+            this.locationInfoBtn.Text = "Location Info";
+            this.locationInfoBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.locationInfoBtn.UseVisualStyleBackColor = true;
+            this.locationInfoBtn.Click += new System.EventHandler(this.MenuBtn_Clicked);
             // 
-            // button1
+            // funnyPicsBtn
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 140);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(200, 60);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "  Extract Funny Pics";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseMnemonic = false;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.extractFunnyPhotos_Click);
+            this.funnyPicsBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.funnyPicsBtn.FlatAppearance.BorderSize = 0;
+            this.funnyPicsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.funnyPicsBtn.ForeColor = System.Drawing.Color.Gainsboro;
+            this.funnyPicsBtn.Image = ((System.Drawing.Image)(resources.GetObject("funnyPicsBtn.Image")));
+            this.funnyPicsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.funnyPicsBtn.Location = new System.Drawing.Point(0, 140);
+            this.funnyPicsBtn.Name = "funnyPicsBtn";
+            this.funnyPicsBtn.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.funnyPicsBtn.Size = new System.Drawing.Size(200, 60);
+            this.funnyPicsBtn.TabIndex = 3;
+            this.funnyPicsBtn.Tag = "FunnyPics";
+            this.funnyPicsBtn.Text = "  Extract Funny Pics";
+            this.funnyPicsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.funnyPicsBtn.UseMnemonic = false;
+            this.funnyPicsBtn.UseVisualStyleBackColor = true;
+            this.funnyPicsBtn.Click += new System.EventHandler(this.MenuBtn_Clicked);
             // 
-            // showPhotos
+            // allPhotosBtn
             // 
-            this.showPhotos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.showPhotos.FlatAppearance.BorderSize = 0;
-            this.showPhotos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showPhotos.ForeColor = System.Drawing.Color.Gainsboro;
-            this.showPhotos.Image = ((System.Drawing.Image)(resources.GetObject("showPhotos.Image")));
-            this.showPhotos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.showPhotos.Location = new System.Drawing.Point(0, 80);
-            this.showPhotos.Name = "showPhotos";
-            this.showPhotos.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.showPhotos.Size = new System.Drawing.Size(200, 60);
-            this.showPhotos.TabIndex = 1;
-            this.showPhotos.Text = "  Extract All Pics";
-            this.showPhotos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.showPhotos.UseMnemonic = false;
-            this.showPhotos.UseVisualStyleBackColor = true;
-            this.showPhotos.Click += new System.EventHandler(this.extractAllPhotos_Click);
+            this.allPhotosBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.allPhotosBtn.FlatAppearance.BorderSize = 0;
+            this.allPhotosBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.allPhotosBtn.ForeColor = System.Drawing.Color.Gainsboro;
+            this.allPhotosBtn.Image = ((System.Drawing.Image)(resources.GetObject("allPhotosBtn.Image")));
+            this.allPhotosBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.allPhotosBtn.Location = new System.Drawing.Point(0, 80);
+            this.allPhotosBtn.Name = "allPhotosBtn";
+            this.allPhotosBtn.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.allPhotosBtn.Size = new System.Drawing.Size(200, 60);
+            this.allPhotosBtn.TabIndex = 1;
+            this.allPhotosBtn.Tag = "AllPics";
+            this.allPhotosBtn.Text = "  Extract All Pics";
+            this.allPhotosBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.allPhotosBtn.UseMnemonic = false;
+            this.allPhotosBtn.UseVisualStyleBackColor = true;
+            this.allPhotosBtn.Click += new System.EventHandler(this.MenuBtn_Clicked);
             // 
             // panelLogo
             // 
@@ -264,6 +266,16 @@ namespace MonitorPhotoApp
             this.ipPanel.TabIndex = 5;
             this.ipPanel.Visible = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label2.Location = new System.Drawing.Point(385, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "or";
+            // 
             // getMyIpBtn
             // 
             this.getMyIpBtn.Location = new System.Drawing.Point(357, 81);
@@ -272,7 +284,7 @@ namespace MonitorPhotoApp
             this.getMyIpBtn.TabIndex = 6;
             this.getMyIpBtn.Text = "Get My IP";
             this.getMyIpBtn.UseVisualStyleBackColor = true;
-            this.getMyIpBtn.Click += new System.EventHandler(this.getMyIpBtn_Click);
+            this.getMyIpBtn.Click += new System.EventHandler(this.GetMyIpBtn_Click);
             // 
             // richTextBox2
             // 
@@ -344,7 +356,7 @@ namespace MonitorPhotoApp
             this.ipTextBox.Size = new System.Drawing.Size(187, 32);
             this.ipTextBox.TabIndex = 3;
             this.ipTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ipTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ipTextBox_KeyDown);
+            this.ipTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IpTextBox_KeyDown);
             // 
             // pnlPicViewer
             // 
@@ -381,7 +393,7 @@ namespace MonitorPhotoApp
             this.radioButtonNo.TabStop = true;
             this.radioButtonNo.Text = "No";
             this.radioButtonNo.UseVisualStyleBackColor = true;
-            this.radioButtonNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButtons_CheckedChanged);
+            this.radioButtonNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RadioButtons_CheckedChanged);
             // 
             // radioButtonYes
             // 
@@ -396,7 +408,7 @@ namespace MonitorPhotoApp
             this.radioButtonYes.TabStop = true;
             this.radioButtonYes.Text = "Yes";
             this.radioButtonYes.UseVisualStyleBackColor = true;
-            this.radioButtonYes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButtons_CheckedChanged);
+            this.radioButtonYes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RadioButtons_CheckedChanged);
             // 
             // labelFunny
             // 
@@ -449,7 +461,7 @@ namespace MonitorPhotoApp
             this.zoomOutBtn.TabIndex = 31;
             this.zoomOutBtn.Text = "Zoom Out";
             this.zoomOutBtn.UseVisualStyleBackColor = true;
-            this.zoomOutBtn.Click += new System.EventHandler(this.zoomOutBtn_Click);
+            this.zoomOutBtn.Click += new System.EventHandler(this.ZoomOutBtn_Click);
             // 
             // zoomInBtn
             // 
@@ -459,7 +471,7 @@ namespace MonitorPhotoApp
             this.zoomInBtn.TabIndex = 30;
             this.zoomInBtn.Text = "Zoom In";
             this.zoomInBtn.UseVisualStyleBackColor = true;
-            this.zoomInBtn.Click += new System.EventHandler(this.zoomInBtn_Click);
+            this.zoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
             // 
             // flagPictureBox
             // 
@@ -509,7 +521,7 @@ namespace MonitorPhotoApp
             this.gMapControl1.Size = new System.Drawing.Size(834, 221);
             this.gMapControl1.TabIndex = 28;
             this.gMapControl1.Zoom = 0D;
-            this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
+            this.gMapControl1.Load += new System.EventHandler(this.GMapControl1_Load);
             // 
             // feelsLikeLabel
             // 
@@ -899,17 +911,7 @@ namespace MonitorPhotoApp
             // localClockTimer
             // 
             this.localClockTimer.Interval = 1000;
-            this.localClockTimer.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(385, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "or";
+            this.localClockTimer.Tick += new System.EventHandler(this.ClockTimer_Tick);
             // 
             // Form1
             // 
@@ -953,12 +955,12 @@ namespace MonitorPhotoApp
 		private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Panel panelSide;
-        private System.Windows.Forms.Button showPhotos;
+        private System.Windows.Forms.Button allPhotosBtn;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel m;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button buttonsStats;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button locationInfoBtn;
+        private System.Windows.Forms.Button funnyPicsBtn;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
