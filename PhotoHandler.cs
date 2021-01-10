@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MonitorPhotoApp
@@ -13,7 +9,7 @@ namespace MonitorPhotoApp
     class PhotosHandler
     {
         public ImageList ImageList { get; private set; }
-        public List<Bitmap> BitMapList { private get; private set; }
+        private List<Bitmap> BitMapList { get; set; }
         public ImageList GetImageList(List<PhotoInfo> photoInfoList)
         {
             this.ImageList = new ImageList();
@@ -36,13 +32,13 @@ namespace MonitorPhotoApp
             return this.ImageList;
         }
 
-        private Color GetPicturesAvrColor(int picIndex)
+        public Color GetPicturesAvrColor(int picIndex)
         {
             return GetMostUsedColor(this.BitMapList[picIndex]);
            
         }
 
-        public Color GetMostUsedColor(Bitmap bmp)
+        private Color GetMostUsedColor(Bitmap bmp)
         {
 
             //Used for tally

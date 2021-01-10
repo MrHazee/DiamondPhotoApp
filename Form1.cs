@@ -90,12 +90,13 @@ namespace MonitorPhotoApp
 				pictureBox1.Visible = false;
 				listView1.Visible = false;
 				funnyPanel.Visible = false;
+				this.Cursor = System.Windows.Forms.Cursors.Default;
+
 
 			}
 
 
 		}
-
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 			List<int> indexes = listView1.SelectedIndices.Cast<int>().ToList();
@@ -117,22 +118,41 @@ namespace MonitorPhotoApp
 
 		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
-			
-			ipTextBox.ForeColor = Color.Black;
+
+		
+			if (ipTextBox.ForeColor == Color.Red)
+			{
+				ipTextBox.Clear();
+				ipTextBox.ForeColor = Color.Black;
+			}
+
+
 			if (e.KeyCode == Keys.Enter)
 			{
-					TextBox objTextBox = (TextBox)sender;
-					string userIp = objTextBox.Text.Trim();
-				if (IPAddress.TryParse(userIp, out _))
+				
+				TextBox objTextBox = (TextBox)sender;
+				string userIp = objTextBox.Text.Trim();
+				string errMsg = "Not Valid IP!";
+				bool success = (IPAddress.TryParse(userIp, out _));
+
+			
+                
+				if (success)
                 {
-					_locationWeather.FillWeatherProperties(userIp);
-					UpdateLocationInfo();
+					this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+					success = _locationWeather.FillWeatherProperties(userIp);
+
+					if (success) UpdateLocationInfo();
+					else errMsg = "Only public IP!";
 				}
-				else
-				{
-					ipTextBox.Text = "Not Valid IP!";
+
+                if (!success) {
+					ipTextBox.Text = errMsg;
 					ipTextBox.ForeColor = Color.Red;
 				}
+					
+				
+				this.Cursor = System.Windows.Forms.Cursors.Default;
 			}
             
 			}
@@ -218,8 +238,10 @@ namespace MonitorPhotoApp
         {
 			_locationWeather.FillWeatherProperties();
 			ipTextBox.Text = _locationWeather._IP;
+			ipTextBox.ForeColor = Color.Black;
 			UpdateLocationInfo();
 		}
 
-    }
+
+	}
 }

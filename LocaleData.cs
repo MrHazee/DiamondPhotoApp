@@ -36,20 +36,21 @@ namespace MonitorPhotoApp
 			
 			GetWeather(GetLocation(GetIPAddress()));
         }
-		public void FillWeatherProperties(string ip)
+		public bool FillWeatherProperties(string ip)
 		{
-
-			GetWeather(GetLocation(ip));
+           
+				return GetWeather(GetLocation(ip));
+			
 		}
 
-		private bool GetWeather(string City)
+		private bool GetWeather(string city)
 		{
-
+			if (city == null) return false;
 			//Assign API KEY which received from OPENWEATHERMAP.ORG  
 			string appId = "68224e5e5f7d7f5cddbe9f980e9f164e";
 
 			//API path with CITY parameter and appId.  
-			string url = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&cnt=1&APPID={1}", City, appId);
+			string url = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&cnt=1&APPID={1}", city, appId);
             try
             {
 				using (WebClient client = new WebClient())
@@ -112,6 +113,7 @@ namespace MonitorPhotoApp
 			try
 			{
 				WebRequest request = WebRequest.Create("http://ipinfo.io/" + ip);
+			
 				using (WebResponse response = request.GetResponse())
 				using (StreamReader stream = new StreamReader(response.GetResponseStream()))
 				{
@@ -122,15 +124,21 @@ namespace MonitorPhotoApp
 					}
 				}
 	
-
-				return (new JavaScriptSerializer()).Deserialize<Location>(res).City;
+				string city = (new JavaScriptSerializer()).Deserialize<Location>(res).City;
+									
+				return city;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				throw; // Do not throw anything
-
+				/*if (e.Status == WebExceptionStatus.Timeout)
+				{
+					// Handle timeout exception
+					return "";
+				}*/
+				throw;
 			}
 			
+
 		}
 
         internal string getLocalTime()
