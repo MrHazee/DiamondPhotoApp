@@ -148,7 +148,7 @@ namespace MonitorPhotoApp
         internal string getLocalTime()
         {
 
-			return DateTime.UtcNow.AddSeconds(_Timezone).ToString();
+			return DateTime.UtcNow.AddSeconds(_Timezone).ToString("HH:mm:ss");
 		}
     }
 }
