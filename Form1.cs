@@ -130,6 +130,12 @@ namespace MonitorPhotoApp
 		}
 		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
+			if (ipTextBox.ForeColor == Color.Red)
+			{
+				ipTextBox.Clear();
+				ipTextBox.ForeColor = Color.Black;
+			}
+
 			if (e.KeyCode == Keys.Enter)
 			{
 				TextBox objTextBox = (TextBox)sender;
@@ -143,25 +149,22 @@ namespace MonitorPhotoApp
 			int cursorPosition = ipRichTextBox.SelectionStart;
 			int lineIndex = ipRichTextBox.GetLineFromCharIndex(cursorPosition);
 			string preDefinedIp = ipRichTextBox.Lines[lineIndex];
-			ipTextBox.Text = preDefinedIp;
 			CustomIp(preDefinedIp);
 		}
 		public void CustomIp(string userIp)
         {
-			// Remove whitespace
+			// Remove whitespace 
 			userIp = userIp.Trim();
 
-			if (ipTextBox.ForeColor == Color.Red)
-			{
-				ipTextBox.Clear();
-				ipTextBox.ForeColor = Color.Black;
-			}
+			ipTextBox.ForeColor = Color.Black;
+			
 			string errMsg = "Not Valid IP!";
 			// Check if string is formatted as a valid IP-address
 			bool success = (IPAddress.TryParse(userIp, out _));
 
 			if (success)
 			{
+				ipTextBox.Text = userIp;
 				// Loading Cursor
 				this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
 				success = locationWeather.FillWeatherProperties(userIp);
@@ -169,8 +172,8 @@ namespace MonitorPhotoApp
 				// If all succeeded, update gui
 				if (success) UpdateLocationUI();
 				else errMsg = "Only public IP!";
-			}
 
+			} 
 			if (!success)
 			{
 				ipTextBox.Text = errMsg;
