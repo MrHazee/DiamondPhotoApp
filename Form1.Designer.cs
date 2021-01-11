@@ -50,10 +50,10 @@ namespace MonitorPhotoApp
             this.ipPanel = new System.Windows.Forms.Panel();
             this.orLabel = new System.Windows.Forms.Label();
             this.getMyIpBtn = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.ipRichTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.ipRichTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.ipRichTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.ipRichTextBox3 = new System.Windows.Forms.RichTextBox();
             this.enterAnyIPLabel = new System.Windows.Forms.Label();
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.pnlPicViewer = new System.Windows.Forms.Panel();
@@ -320,10 +320,10 @@ namespace MonitorPhotoApp
             // 
             this.ipPanel.Controls.Add(this.orLabel);
             this.ipPanel.Controls.Add(this.getMyIpBtn);
-            this.ipPanel.Controls.Add(this.richTextBox2);
-            this.ipPanel.Controls.Add(this.richTextBox4);
-            this.ipPanel.Controls.Add(this.richTextBox1);
-            this.ipPanel.Controls.Add(this.richTextBox3);
+            this.ipPanel.Controls.Add(this.ipRichTextBox2);
+            this.ipPanel.Controls.Add(this.ipRichTextBox4);
+            this.ipPanel.Controls.Add(this.ipRichTextBox1);
+            this.ipPanel.Controls.Add(this.ipRichTextBox3);
             this.ipPanel.Controls.Add(this.enterAnyIPLabel);
             this.ipPanel.Controls.Add(this.ipTextBox);
             this.ipPanel.Location = new System.Drawing.Point(9, 6);
@@ -352,57 +352,61 @@ namespace MonitorPhotoApp
             this.getMyIpBtn.UseVisualStyleBackColor = true;
             this.getMyIpBtn.Click += new System.EventHandler(this.GetMyIpBtn_Click);
             // 
-            // richTextBox2
+            // ipRichTextBox2
             // 
-            this.richTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.ForeColor = System.Drawing.Color.DimGray;
-            this.richTextBox2.Location = new System.Drawing.Point(690, 9);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(122, 88);
-            this.richTextBox2.TabIndex = 5;
-            this.richTextBox2.Text = "196.200.184.31\n111.93.163.56\n72.30.2.43\n8.8.8.8";
+            this.ipRichTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.ipRichTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ipRichTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipRichTextBox2.ForeColor = System.Drawing.Color.DimGray;
+            this.ipRichTextBox2.Location = new System.Drawing.Point(690, 9);
+            this.ipRichTextBox2.Name = "ipRichTextBox2";
+            this.ipRichTextBox2.ReadOnly = true;
+            this.ipRichTextBox2.Size = new System.Drawing.Size(122, 88);
+            this.ipRichTextBox2.TabIndex = 5;
+            this.ipRichTextBox2.Text = "196.200.184.31\n111.93.163.56\n72.30.2.43\n8.8.8.8";
+            this.ipRichTextBox2.Click += new System.EventHandler(this.IpRichTextBox_Click);
             // 
-            // richTextBox4
+            // ipRichTextBox4
             // 
-            this.richTextBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox4.ForeColor = System.Drawing.Color.DimGray;
-            this.richTextBox4.Location = new System.Drawing.Point(129, 9);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.Size = new System.Drawing.Size(115, 88);
-            this.richTextBox4.TabIndex = 5;
-            this.richTextBox4.Text = "88.208.245.221\n223.31.121.171\n109.228.14.251\n5.202.100.101";
+            this.ipRichTextBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.ipRichTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ipRichTextBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipRichTextBox4.ForeColor = System.Drawing.Color.DimGray;
+            this.ipRichTextBox4.Location = new System.Drawing.Point(129, 9);
+            this.ipRichTextBox4.Name = "ipRichTextBox4";
+            this.ipRichTextBox4.ReadOnly = true;
+            this.ipRichTextBox4.Size = new System.Drawing.Size(115, 88);
+            this.ipRichTextBox4.TabIndex = 5;
+            this.ipRichTextBox4.Text = "88.208.245.221\n223.31.121.171\n109.228.14.251\n5.202.100.101";
+            this.ipRichTextBox4.Click += new System.EventHandler(this.IpRichTextBox_Click);
             // 
-            // richTextBox1
+            // ipRichTextBox1
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.DimGray;
-            this.richTextBox1.Location = new System.Drawing.Point(8, 9);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(115, 88);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "88.213.251.98\n195.98.79.117\n91.121.143.182\n66.220.149.25";
+            this.ipRichTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.ipRichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ipRichTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipRichTextBox1.ForeColor = System.Drawing.Color.DimGray;
+            this.ipRichTextBox1.Location = new System.Drawing.Point(8, 9);
+            this.ipRichTextBox1.Name = "ipRichTextBox1";
+            this.ipRichTextBox1.ReadOnly = true;
+            this.ipRichTextBox1.Size = new System.Drawing.Size(115, 88);
+            this.ipRichTextBox1.TabIndex = 5;
+            this.ipRichTextBox1.Text = "88.213.251.98\n195.98.79.117\n91.121.143.182\n66.220.149.25";
+            this.ipRichTextBox1.Click += new System.EventHandler(this.IpRichTextBox_Click);
             // 
-            // richTextBox3
+            // ipRichTextBox3
             // 
-            this.richTextBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox3.ForeColor = System.Drawing.Color.DimGray;
-            this.richTextBox3.Location = new System.Drawing.Point(545, 9);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(139, 88);
-            this.richTextBox3.TabIndex = 5;
-            this.richTextBox3.Text = "209.85.231.104 \n207.46.170.123\n213.171.217.148\n46.228.199.116";
+            this.ipRichTextBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.ipRichTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ipRichTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipRichTextBox3.ForeColor = System.Drawing.Color.DimGray;
+            this.ipRichTextBox3.Location = new System.Drawing.Point(545, 9);
+            this.ipRichTextBox3.Name = "ipRichTextBox3";
+            this.ipRichTextBox3.ReadOnly = true;
+            this.ipRichTextBox3.Size = new System.Drawing.Size(139, 88);
+            this.ipRichTextBox3.TabIndex = 5;
+            this.ipRichTextBox3.Text = "209.85.231.104 \n207.46.170.123\n213.171.217.148\n46.228.199.116";
+            this.ipRichTextBox3.Click += new System.EventHandler(this.IpRichTextBox_Click);
             // 
             // enterAnyIPLabel
             // 
@@ -1050,10 +1054,10 @@ namespace MonitorPhotoApp
         private System.Windows.Forms.Panel ipPanel;
         private System.Windows.Forms.Button zoomInBtn;
         private System.Windows.Forms.Button zoomOutBtn;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox ipRichTextBox2;
+        private System.Windows.Forms.RichTextBox ipRichTextBox4;
+        private System.Windows.Forms.RichTextBox ipRichTextBox1;
+        private System.Windows.Forms.RichTextBox ipRichTextBox3;
         private System.Windows.Forms.Panel funnyPanel;
         private System.Windows.Forms.Label labelFunny;
         private System.Windows.Forms.RadioButton radioButtonNo;

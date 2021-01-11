@@ -137,12 +137,9 @@ namespace MonitorPhotoApp
 			}
 			catch (Exception e)
 			{
-				/*if (e.Status == WebExceptionStatus.Timeout)
-				{
-					// Handle timeout exception
-					return "";
-				}*/
-				throw;
+				
+				Log.AddToLog("Error when retrieving location: " + e.Message);
+				return "";
 			}
 			
 

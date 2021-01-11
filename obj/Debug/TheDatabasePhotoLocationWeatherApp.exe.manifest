@@ -307,14 +307,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TheDatabasePhotoLocationWeatherApp.exe" size="1141208">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TheDatabasePhotoLocationWeatherApp.exe" size="1141720">
       <assemblyIdentity name="TheDatabasePhotoLocationWeatherApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>a5JiJC2lCR66hJ0G0IZ/eG6l3w/UW36Tl2tbgwGgJuk=</dsig:DigestValue>
+        <dsig:DigestValue>7ocPN37UvrWI7ejlRSgcX88DLUX5eLfq3RHrBZHlkp0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

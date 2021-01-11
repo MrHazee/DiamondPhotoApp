@@ -130,43 +130,55 @@ namespace MonitorPhotoApp
 		}
 		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
-		
+			if (e.KeyCode == Keys.Enter)
+			{
+				TextBox objTextBox = (TextBox)sender;
+				CustomIp(objTextBox.Text);		
+			}
+            
+		}
+			public void IpRichTextBox_Click(object sender, EventArgs e)
+		{
+			RichTextBox ipRichTextBox = sender as RichTextBox;
+			int cursorPosition = ipRichTextBox.SelectionStart;
+			int lineIndex = ipRichTextBox.GetLineFromCharIndex(cursorPosition);
+			string preDefinedIp = ipRichTextBox.Lines[lineIndex];
+			ipTextBox.Text = preDefinedIp;
+			CustomIp(preDefinedIp);
+		}
+		public void CustomIp(string userIp)
+        {
+			// Remove whitespace
+			userIp = userIp.Trim();
+
 			if (ipTextBox.ForeColor == Color.Red)
 			{
 				ipTextBox.Clear();
 				ipTextBox.ForeColor = Color.Black;
 			}
+			string errMsg = "Not Valid IP!";
+			// Check if string is formatted as a valid IP-address
+			bool success = (IPAddress.TryParse(userIp, out _));
 
-			if (e.KeyCode == Keys.Enter)
+			if (success)
 			{
-				
-				TextBox objTextBox = (TextBox)sender;
-				string userIp = objTextBox.Text.Trim();
-				string errMsg = "Not Valid IP!";
-				// Check if string is formatted as a valid IP-address
-				bool success = (IPAddress.TryParse(userIp, out _));
-                
-				if (success)
-                {
-					// Loading Cursor
-					this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-					success = locationWeather.FillWeatherProperties(userIp);
+				// Loading Cursor
+				this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+				success = locationWeather.FillWeatherProperties(userIp);
 
-					// If all succeeded, update gui
-					if (success) UpdateLocationUI();
-					else errMsg = "Only public IP!";
-				}
-
-                if (!success) {
-					ipTextBox.Text = errMsg;
-					ipTextBox.ForeColor = Color.Red;
-				}
-					
-				this.Cursor = System.Windows.Forms.Cursors.Default;
-			}
-            
+				// If all succeeded, update gui
+				if (success) UpdateLocationUI();
+				else errMsg = "Only public IP!";
 			}
 
+			if (!success)
+			{
+				ipTextBox.Text = errMsg;
+				ipTextBox.ForeColor = Color.Red;
+			}
+
+			this.Cursor = System.Windows.Forms.Cursors.Default;
+		}
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
 			localTimeLabelVal.Text = locationWeather.getLocalTime();
