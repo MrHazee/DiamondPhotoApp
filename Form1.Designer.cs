@@ -35,6 +35,9 @@ namespace MonitorPhotoApp
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.menuPanel = new System.Windows.Forms.Panel();
             this.locationInfoBtn = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.loggerRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.notFunnyPicsBtn = new System.Windows.Forms.Button();
             this.funnyPicsBtn = new System.Windows.Forms.Button();
             this.allPhotosBtn = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
@@ -95,6 +98,7 @@ namespace MonitorPhotoApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.localClockTimer = new System.Windows.Forms.Timer(this.components);
             this.menuPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.funnyPanel.SuspendLayout();
             this.m.SuspendLayout();
             this.ipPanel.SuspendLayout();
@@ -111,6 +115,8 @@ namespace MonitorPhotoApp
             // 
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(88)))));
             this.menuPanel.Controls.Add(this.locationInfoBtn);
+            this.menuPanel.Controls.Add(this.panel1);
+            this.menuPanel.Controls.Add(this.notFunnyPicsBtn);
             this.menuPanel.Controls.Add(this.funnyPicsBtn);
             this.menuPanel.Controls.Add(this.allPhotosBtn);
             this.menuPanel.Controls.Add(this.panelLogo);
@@ -128,15 +134,54 @@ namespace MonitorPhotoApp
             this.locationInfoBtn.ForeColor = System.Drawing.Color.Gainsboro;
             this.locationInfoBtn.Image = ((System.Drawing.Image)(resources.GetObject("locationInfoBtn.Image")));
             this.locationInfoBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.locationInfoBtn.Location = new System.Drawing.Point(0, 200);
+            this.locationInfoBtn.Location = new System.Drawing.Point(0, 260);
             this.locationInfoBtn.Name = "locationInfoBtn";
             this.locationInfoBtn.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.locationInfoBtn.Size = new System.Drawing.Size(200, 60);
-            this.locationInfoBtn.TabIndex = 4;
+            this.locationInfoBtn.TabIndex = 5;
             this.locationInfoBtn.Text = "Location Info";
             this.locationInfoBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.locationInfoBtn.UseVisualStyleBackColor = true;
             this.locationInfoBtn.Click += new System.EventHandler(this.MenuBtn_Clicked);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.loggerRichTextBox);
+            this.panel1.Location = new System.Drawing.Point(0, 302);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 272);
+            this.panel1.TabIndex = 0;
+            // 
+            // loggerRichTextBox
+            // 
+            this.loggerRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(49)))), ((int)(((byte)(78)))));
+            this.loggerRichTextBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.loggerRichTextBox.Location = new System.Drawing.Point(0, 63);
+            this.loggerRichTextBox.Name = "loggerRichTextBox";
+            this.loggerRichTextBox.ReadOnly = true;
+            this.loggerRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.loggerRichTextBox.Size = new System.Drawing.Size(200, 251);
+            this.loggerRichTextBox.TabIndex = 0;
+            this.loggerRichTextBox.Text = "";
+            this.loggerRichTextBox.TextChanged += new System.EventHandler(this.loggerRichTextBox_TextChanged);
+            // 
+            // notFunnyPicsBtn
+            // 
+            this.notFunnyPicsBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.notFunnyPicsBtn.FlatAppearance.BorderSize = 0;
+            this.notFunnyPicsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.notFunnyPicsBtn.ForeColor = System.Drawing.Color.Gainsboro;
+            this.notFunnyPicsBtn.Image = global::TheDatabasePhotoLocationWeatherApp.Properties.Resources.photoIcon;
+            this.notFunnyPicsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.notFunnyPicsBtn.Location = new System.Drawing.Point(0, 200);
+            this.notFunnyPicsBtn.Name = "notFunnyPicsBtn";
+            this.notFunnyPicsBtn.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.notFunnyPicsBtn.Size = new System.Drawing.Size(200, 60);
+            this.notFunnyPicsBtn.TabIndex = 4;
+            this.notFunnyPicsBtn.Text = " Not Funny Pics";
+            this.notFunnyPicsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.notFunnyPicsBtn.UseVisualStyleBackColor = true;
+            this.notFunnyPicsBtn.Click += new System.EventHandler(this.MenuBtn_Clicked);
             // 
             // funnyPicsBtn
             // 
@@ -152,7 +197,7 @@ namespace MonitorPhotoApp
             this.funnyPicsBtn.Size = new System.Drawing.Size(200, 60);
             this.funnyPicsBtn.TabIndex = 3;
             this.funnyPicsBtn.Tag = "FunnyPics";
-            this.funnyPicsBtn.Text = "  Extract Funny Pics";
+            this.funnyPicsBtn.Text = " Funny Pics";
             this.funnyPicsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.funnyPicsBtn.UseMnemonic = false;
             this.funnyPicsBtn.UseVisualStyleBackColor = true;
@@ -172,7 +217,7 @@ namespace MonitorPhotoApp
             this.allPhotosBtn.Size = new System.Drawing.Size(200, 60);
             this.allPhotosBtn.TabIndex = 1;
             this.allPhotosBtn.Tag = "AllPics";
-            this.allPhotosBtn.Text = "  Extract All Pics";
+            this.allPhotosBtn.Text = "  All Pics";
             this.allPhotosBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.allPhotosBtn.UseMnemonic = false;
             this.allPhotosBtn.UseVisualStyleBackColor = true;
@@ -267,7 +312,7 @@ namespace MonitorPhotoApp
             this.listView1.Size = new System.Drawing.Size(834, 102);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
             // 
             // ipPanel
             // 
@@ -934,6 +979,7 @@ namespace MonitorPhotoApp
             this.Text = "Monitor Photo Shower";
             this.TransparencyKey = System.Drawing.Color.MediumBlue;
             this.menuPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.funnyPanel.ResumeLayout(false);
             this.funnyPanel.PerformLayout();
             this.m.ResumeLayout(false);
@@ -960,7 +1006,7 @@ namespace MonitorPhotoApp
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel m;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button locationInfoBtn;
+        private System.Windows.Forms.Button notFunnyPicsBtn;
         private System.Windows.Forms.Button funnyPicsBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnlPicViewer;
@@ -1016,6 +1062,9 @@ namespace MonitorPhotoApp
         private System.Windows.Forms.Label latLabelVal;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox loggerRichTextBox;
+        private System.Windows.Forms.Button locationInfoBtn;
     }
 }
 

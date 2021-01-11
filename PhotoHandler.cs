@@ -10,12 +10,21 @@ namespace MonitorPhotoApp
     {
         public ImageList ImageList { get; private set; }
         private List<Bitmap> BitMapList { get; set; }
-        public ImageList GetImageList(List<PhotoInfo> photoInfoList)
+
+        public PhotosHandler()
         {
+
             this.ImageList = new ImageList();
             this.ImageList.ImageSize = new Size(56, 56);
             this.ImageList.ColorDepth = ColorDepth.Depth32Bit;
+
             this.BitMapList = new List<Bitmap>();
+        }
+        public ImageList GetImageListFromURLs(List<PhotoInfo> photoInfoList)
+        {
+
+            this.ImageList.Images.Clear();
+            this.BitMapList.Clear();
 
             for (int i = 0; i < photoInfoList.Count; i++)  
             {
@@ -41,7 +50,6 @@ namespace MonitorPhotoApp
         private Color GetMostUsedColor(Bitmap bmp)
         {
 
-            //Used for tally
             int r = 0;
             int g = 0;
             int b = 0;

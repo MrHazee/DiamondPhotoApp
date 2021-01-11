@@ -50,3 +50,5 @@ C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\obj\Release\TheData
 C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\obj\Release\TheDatabasePhotoLocationWeatherApp.application
 C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\obj\Release\TheDatabasePhotoLocationWeatherApp.exe
 C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\obj\Release\TheDatabasePhotoLocationWeatherApp.pdb
+C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\bin\Release\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Rasmus\source\repos\MonitorPhotoApp\MonitorPhotoApp\bin\Release\Microsoft.Extensions.Logging.Abstractions.xml

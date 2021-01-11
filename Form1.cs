@@ -12,23 +12,25 @@ namespace MonitorPhotoApp
 {
 	public partial class Form1 : Form
 	{
-
-		private MyDataBaseClass _pgDB;
-		private PhotosHandler _PhotosHandler;
-		private LocaleData _locationWeather;
+		
+		private DataBaseHandler databaseHandler;
+		private PhotosHandler photoControl;
+		private LocaleData locationWeather;
 
 		public Form1()
 		{
 	
 			InitializeComponent();
+			Log.InitLogger(loggerRichTextBox);
 
-			_PhotosHandler = new PhotosHandler();
-			_locationWeather = new LocaleData();
+			Log.AddToLog("Initializing objects");
+		
+			photoControl = new PhotosHandler();
+			locationWeather = new LocaleData();
 
-			_pgDB = new MyDataBaseClass();
-			_pgDB.OnUpdateStatus += new MyDataBaseClass.StatusUpdateHandler(UpdateAndShowPhotoPanels);
-			_pgDB.connectToDB();
-			
+			databaseHandler = new DataBaseHandler();
+			databaseHandler.OnDatabasIsReady += new DataBaseHandler.StatusUpdateHandler(UpdateAndShowPhotoPanels);
+
 		}
 
      
@@ -36,16 +38,16 @@ namespace MonitorPhotoApp
         {
 			listView1.Clear();
 			
-			for (int i = 0; i < _pgDB.PhotosInfoList.Count; i++)
+			for (int i = 0; i < databaseHandler.PhotosInfoList.Count; i++)
             {
 				listView1.Items.Add("", i);
 			}
-			listView1.LargeImageList = _PhotosHandler.GetImageList(_pgDB.PhotosInfoList);
+			listView1.LargeImageList = photoControl.GetImageListFromURLs(databaseHandler.PhotosInfoList);
 
 			if (this.listView1.Items.Count > 0)
 			{
 				this.listView1.Items[0].Selected = true;
-				pictureBox1.BackColor = _PhotosHandler.GetPicturesAvrColor(0);
+				pictureBox1.BackColor = photoControl.GetPicturesAvrColor(0);
 			}
             else
             {
@@ -62,27 +64,29 @@ namespace MonitorPhotoApp
 			infoPane.Visible = false;
 			ipPanel.Visible = false;
 
-			
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 		}
 
 		private void MenuBtn_Clicked(object sender, EventArgs e)
 		{
-
 			this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
 			Button btn = sender as Button;
 
 			if (btn == allPhotosBtn)
 			{
-				_pgDB.extractDataFromDB(PhotoAttribute.all);
+				databaseHandler.ExtractDataFromDB(PhotoAttribute.all);
 			}
 			else if (btn == funnyPicsBtn)
 			{
-				_pgDB.extractDataFromDB(PhotoAttribute.funny);
+				databaseHandler.ExtractDataFromDB(PhotoAttribute.funny);
+			}
+			else if (btn == notFunnyPicsBtn)
+			{
+				databaseHandler.ExtractDataFromDB(PhotoAttribute.notFunny);
 			}
 			else if (btn == locationInfoBtn) {
 
-				_locationWeather.FillWeatherProperties();
+				locationWeather.FillWeatherProperties();
 				UpdateLocationInfo();
 
 				ipPanel.Visible = true;
@@ -92,20 +96,19 @@ namespace MonitorPhotoApp
 				funnyPanel.Visible = false;
 				this.Cursor = System.Windows.Forms.Cursors.Default;
 
-
 			}
 
 
 		}
-		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+		private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 			List<int> indexes = listView1.SelectedIndices.Cast<int>().ToList();
 			if (indexes.Count > 0)
             {
-				pictureBox1.Load(_pgDB.PhotosInfoList[indexes[0]].URL);
-				pictureBox1.BackColor = _PhotosHandler.GetPicturesAvrColor(indexes[0]);
+				pictureBox1.Load(databaseHandler.PhotosInfoList[indexes[0]].URL);
+				pictureBox1.BackColor = photoControl.GetPicturesAvrColor(indexes[0]);
 				
-				if (_pgDB.PhotosInfoList[indexes[0]].IsFunny){
+				if (databaseHandler.PhotosInfoList[indexes[0]].IsFunny){
 					radioButtonYes.Checked = true;
                 }
                 else {
@@ -115,17 +118,14 @@ namespace MonitorPhotoApp
 			}
 
 		}
-
 		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
-
 		
 			if (ipTextBox.ForeColor == Color.Red)
 			{
 				ipTextBox.Clear();
 				ipTextBox.ForeColor = Color.Black;
 			}
-
 
 			if (e.KeyCode == Keys.Enter)
 			{
@@ -134,13 +134,11 @@ namespace MonitorPhotoApp
 				string userIp = objTextBox.Text.Trim();
 				string errMsg = "Not Valid IP!";
 				bool success = (IPAddress.TryParse(userIp, out _));
-
-			
                 
 				if (success)
                 {
 					this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-					success = _locationWeather.FillWeatherProperties(userIp);
+					success = locationWeather.FillWeatherProperties(userIp);
 
 					if (success) UpdateLocationInfo();
 					else errMsg = "Only public IP!";
@@ -151,7 +149,6 @@ namespace MonitorPhotoApp
 					ipTextBox.ForeColor = Color.Red;
 				}
 					
-				
 				this.Cursor = System.Windows.Forms.Cursors.Default;
 			}
             
@@ -159,35 +156,35 @@ namespace MonitorPhotoApp
 
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
-			localTimeLabelVal.Text = _locationWeather.getLocalTime();
+			localTimeLabelVal.Text = locationWeather.getLocalTime();
 
 		}
 		private void UpdateLocationInfo()
 		{
 			
-			gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(_locationWeather._Lat), double.Parse(_locationWeather._Lon));
+			gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(locationWeather._Lat), double.Parse(locationWeather._Lon));
 		
 			gMapControl1.Update();
 			gMapControl1.CanDragMap = true;
 
-			countryDisplayNameLabel.Text = _locationWeather._CountryDisplayName;
+			countryDisplayNameLabel.Text = locationWeather._CountryDisplayName;
 
-			ipLabelVal.Text = _locationWeather._IP;
-			countryLabelVal.Text = _locationWeather._Country;
-			cityLabelVal.Text = _locationWeather._City;
-			currencyLabelVal.Text = _locationWeather._Currency;
-			currencySymbolLabelVal.Text = _locationWeather._CurrencySymbol;
-			longLabelVal.Text = _locationWeather._Lon;
-			latLabelVal.Text = _locationWeather._Lat;
+			ipLabelVal.Text = locationWeather._IP;
+			countryLabelVal.Text = locationWeather._Country;
+			cityLabelVal.Text = locationWeather._City;
+			currencyLabelVal.Text = locationWeather._Currency;
+			currencySymbolLabelVal.Text = locationWeather._CurrencySymbol;
+			longLabelVal.Text = locationWeather._Lon;
+			latLabelVal.Text = locationWeather._Lat;
 
-			weatherDesciptionLabelVal.Text = _locationWeather._WeatherDescription.FirstCharToUpper();
-			tempLabelVal.Text = _locationWeather._Temp + "°";
-			feelsLikeLabelVal.Text = _locationWeather._TempFeelsLike + "°";
-			maxTempLabelVal.Text = _locationWeather._TempMax + "°";
-			minTempLabelVal.Text = _locationWeather._TempMin + "°";
-			humidityLabelVal.Text = _locationWeather._Humidity + "%";
+			weatherDesciptionLabelVal.Text = locationWeather._WeatherDescription.FirstCharToUpper();
+			tempLabelVal.Text = locationWeather._Temp + "°";
+			feelsLikeLabelVal.Text = locationWeather._TempFeelsLike + "°";
+			maxTempLabelVal.Text = locationWeather._TempMax + "°";
+			minTempLabelVal.Text = locationWeather._TempMin + "°";
+			humidityLabelVal.Text = locationWeather._Humidity + "%";
 
-			flagPictureBox.Load(_locationWeather._flagIconUrl);
+			flagPictureBox.Load(locationWeather._flagIconUrl);
 
 			localClockTimer.Start();
 		}
@@ -220,28 +217,34 @@ namespace MonitorPhotoApp
 		{
 			RadioButton radioButton = sender as RadioButton;
 			List<int> indexes = listView1.SelectedIndices.Cast<int>().ToList();
-			int photoId = _pgDB.PhotosInfoList[indexes[0]].ID;
+			int photoId = databaseHandler.PhotosInfoList[indexes[0]].ID;
 			if (radioButtonYes.Checked)
 			{
-				_pgDB.AlterDB(photoId, true);
-				_pgDB.PhotosInfoList[indexes[0]].IsFunny = true;
+				databaseHandler.AlterDB(photoId, true);
+				databaseHandler.PhotosInfoList[indexes[0]].IsFunny = true;
 			}
 			else if (radioButtonNo.Checked)
 			{
-				_pgDB.AlterDB(photoId, false);
-				_pgDB.PhotosInfoList[indexes[0]].IsFunny = false;
+				databaseHandler.AlterDB(photoId, false);
+				databaseHandler.PhotosInfoList[indexes[0]].IsFunny = false;
 
 			}
 		}
 
         private void GetMyIpBtn_Click(object sender, EventArgs e)
         {
-			_locationWeather.FillWeatherProperties();
-			ipTextBox.Text = _locationWeather._IP;
+			locationWeather.FillWeatherProperties();
+			ipTextBox.Text = locationWeather._IP;
 			ipTextBox.ForeColor = Color.Black;
 			UpdateLocationInfo();
 		}
 
-
+        private void loggerRichTextBox_TextChanged(object sender, EventArgs e)
+        {
+				// set the current caret position to the end
+			loggerRichTextBox.SelectionStart = loggerRichTextBox.Text.Length;
+			// scroll it automatically
+			loggerRichTextBox.ScrollToCaret();
+			}
 	}
 }

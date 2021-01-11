@@ -50,6 +50,7 @@ namespace MonitorPhotoApp
 			string appId = "68224e5e5f7d7f5cddbe9f980e9f164e";
 
 			//API path with CITY parameter and appId.  
+			Log.AddToLog("Retrieving weather data..");
 			string url = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&cnt=1&APPID={1}", city, appId);
             try
             {
@@ -79,6 +80,7 @@ namespace MonitorPhotoApp
 		
 
 				}
+				Log.AddToLog("Done");
 				return true;
 			}
             catch (Exception)
@@ -89,6 +91,8 @@ namespace MonitorPhotoApp
 		}
 		private string GetIPAddress()
 		{
+			Log.AddToLog("Retrievning ip..");
+
 			String address = "";
 			WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
 			using (WebResponse response = request.GetResponse())
@@ -103,12 +107,13 @@ namespace MonitorPhotoApp
 
 			this._IP = address;
 
+			Log.AddToLog("Ip = " + address);
 			return address;
 		}
 
 		private string GetLocation(string ip)
 		{
-
+			Log.AddToLog("Retrievning Location..");
 			var res = "";
 			try
 			{
@@ -125,7 +130,7 @@ namespace MonitorPhotoApp
 				}
 	
 				string city = (new JavaScriptSerializer()).Deserialize<Location>(res).City;
-									
+				Log.AddToLog("Location = " + city);
 				return city;
 			}
 			catch (Exception e)
