@@ -46,7 +46,7 @@ namespace MonitorPhotoApp
             this.radioButtonYes = new System.Windows.Forms.RadioButton();
             this.labelFunny = new System.Windows.Forms.Label();
             this.m = new System.Windows.Forms.Panel();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.photosListView = new System.Windows.Forms.ListView();
             this.ipPanel = new System.Windows.Forms.Panel();
             this.orLabel = new System.Windows.Forms.Label();
             this.getMyIpBtn = new System.Windows.Forms.Button();
@@ -291,7 +291,7 @@ namespace MonitorPhotoApp
             // 
             this.m.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.m.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.m.Controls.Add(this.listView1);
+            this.m.Controls.Add(this.photosListView);
             this.m.Controls.Add(this.ipPanel);
             this.m.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.m.Location = new System.Drawing.Point(200, 463);
@@ -301,18 +301,18 @@ namespace MonitorPhotoApp
             // 
             // listView1
             // 
-            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.listView1.AutoArrange = false;
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 9);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(834, 102);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
+            this.photosListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.photosListView.AutoArrange = false;
+            this.photosListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.photosListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.photosListView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.photosListView.HideSelection = false;
+            this.photosListView.Location = new System.Drawing.Point(0, 9);
+            this.photosListView.Name = "listView1";
+            this.photosListView.Size = new System.Drawing.Size(834, 102);
+            this.photosListView.TabIndex = 1;
+            this.photosListView.UseCompatibleStateImageBehavior = false;
+            this.photosListView.SelectedIndexChanged += new System.EventHandler(this.PhotoListView_SelectedIndexChanged);
             // 
             // ipPanel
             // 
@@ -868,7 +868,7 @@ namespace MonitorPhotoApp
             this.zoomOutBtn.TabIndex = 31;
             this.zoomOutBtn.Text = "Zoom Out";
             this.zoomOutBtn.UseVisualStyleBackColor = true;
-            this.zoomOutBtn.Click += new System.EventHandler(this.ZoomOutBtn_Click);
+            this.zoomOutBtn.Click += new System.EventHandler(this.MapZoomOutBtn_Click);
             // 
             // zoomInBtn
             // 
@@ -878,7 +878,7 @@ namespace MonitorPhotoApp
             this.zoomInBtn.TabIndex = 30;
             this.zoomInBtn.Text = "Zoom In";
             this.zoomInBtn.UseVisualStyleBackColor = true;
-            this.zoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
+            this.zoomInBtn.Click += new System.EventHandler(this.MapZoomInBtn_Click);
             // 
             // flagPictureBox
             // 
@@ -1005,7 +1005,7 @@ namespace MonitorPhotoApp
         private System.Windows.Forms.Button allPhotosBtn;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel m;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView photosListView;
         private System.Windows.Forms.Button notFunnyPicsBtn;
         private System.Windows.Forms.Button funnyPicsBtn;
         private System.Windows.Forms.PictureBox pictureBox1;

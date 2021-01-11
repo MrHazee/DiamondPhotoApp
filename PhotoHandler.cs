@@ -44,7 +44,6 @@ namespace MonitorPhotoApp
         public Color GetPicturesAvrColor(int picIndex)
         {
             return GetMostUsedColor(this.BitMapList[picIndex]);
-           
         }
 
         private Color GetMostUsedColor(Bitmap bmp)
@@ -56,6 +55,7 @@ namespace MonitorPhotoApp
 
             int total = 0;
 
+            // Iterate through every pixel and store the total value of R,G and B
             for (int x = 0; x < bmp.Width; x++)
             {
                 for (int y = 0; y < bmp.Height; y++)

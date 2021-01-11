@@ -101,10 +101,12 @@ namespace MonitorPhotoApp
 				address = stream.ReadToEnd();
 			}
 
+			// Extract IP manually from string
 			int first = address.IndexOf("Address: ") + 9;
 			int last = address.LastIndexOf("</body>");
 			address = address.Substring(first, last - first);
 
+			// Store IP
 			this._IP = address;
 
 			Log.AddToLog("Ip = " + address);
