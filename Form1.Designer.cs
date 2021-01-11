@@ -147,14 +147,16 @@ namespace MonitorPhotoApp
             // panel1
             // 
             this.panel1.Controls.Add(this.loggerRichTextBox);
-            this.panel1.Location = new System.Drawing.Point(0, 302);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 260);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 272);
+            this.panel1.Size = new System.Drawing.Size(200, 314);
             this.panel1.TabIndex = 0;
             // 
             // loggerRichTextBox
             // 
             this.loggerRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(49)))), ((int)(((byte)(78)))));
+            this.loggerRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loggerRichTextBox.ForeColor = System.Drawing.Color.DarkGray;
             this.loggerRichTextBox.Location = new System.Drawing.Point(0, 63);
             this.loggerRichTextBox.Name = "loggerRichTextBox";
@@ -299,7 +301,7 @@ namespace MonitorPhotoApp
             this.m.Size = new System.Drawing.Size(834, 111);
             this.m.TabIndex = 3;
             // 
-            // listView1
+            // photosListView
             // 
             this.photosListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.photosListView.AutoArrange = false;
@@ -308,7 +310,7 @@ namespace MonitorPhotoApp
             this.photosListView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.photosListView.HideSelection = false;
             this.photosListView.Location = new System.Drawing.Point(0, 9);
-            this.photosListView.Name = "listView1";
+            this.photosListView.Name = "photosListView";
             this.photosListView.Size = new System.Drawing.Size(834, 102);
             this.photosListView.TabIndex = 1;
             this.photosListView.UseCompatibleStateImageBehavior = false;
