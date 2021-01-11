@@ -29,6 +29,7 @@ namespace MonitorPhotoApp
 			locationWeather = new LocaleData();
 
 			databaseHandler = new DataBaseHandler();
+			// Not necessary to use delegate here
 			databaseHandler.OnDatabasIsReady += new DataBaseHandler.StatusUpdateHandler(UpdateAndShowPhotoPanels);
 
 		}
@@ -36,6 +37,8 @@ namespace MonitorPhotoApp
      
         private void UpdateAndShowPhotoPanels(object sender, ProgressEventArgs e)
         {
+
+			Log.AddToLog($"We recieved photo attribute \"{e.Attr}\" from databse class. Proof of delegate concept.");
 			// Clear list before filling it up
 			photosListView.Clear();
 			
