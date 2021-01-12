@@ -4,7 +4,7 @@ This app is for test purpose only.
 
 ## Features
 
-Two way communication with PostgreSQL-server<br/>
+Communication with PostgreSQL-server<br/>
 Photo viewer<br/>
 Average color from photo calculation
  
