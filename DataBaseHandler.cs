@@ -19,9 +19,7 @@ namespace MonitorPhotoApp
 
         private NpgsqlConnection conn;
         private NpgsqlDataReader dr;
-        
         public List<PhotoInfo> PhotosInfoList { get; private set; }
-        
         public DataBaseHandler()
         {
             this.PhotosInfoList = new List<PhotoInfo>();
@@ -29,7 +27,6 @@ namespace MonitorPhotoApp
             {
                 Log.AddToLog("Creating DB connection");
                 conn = new NpgsqlConnection(server + port + dbName + dbUser + dbUsrPwd);
-          
             }
             catch (Exception)
             {
@@ -37,7 +34,6 @@ namespace MonitorPhotoApp
                 throw;
             }
         }
-
         private void DBDataIsReady(PhotoAttribute attr)
         {
             // Make sure someone is listening to event
@@ -47,12 +43,10 @@ namespace MonitorPhotoApp
             // Broadcast to listeners
             OnDatabasIsReady(this, args);
         }
-    
         public void ExtractDataFromDB(PhotoAttribute attr)
         {
        
                 string query = "SELECT photo_id ,photo_url FROM photos";
-
 
                 switch (attr)
                 {
@@ -70,7 +64,6 @@ namespace MonitorPhotoApp
                     default:
                         break;
                 }
-
             Log.AddToLog("Reading Database. Query " + query);
 
             try
@@ -102,12 +95,11 @@ namespace MonitorPhotoApp
             }
             // Notify that the data from DB is ready to be processed
             DBDataIsReady(attr);
-
         }
 
         public void AlterDB(int photoId, bool isFunny)
         {
-
+            // INSERT query to database to set value of isFunny (bool)
             string query = "UPDATE photos SET isFunny = " + isFunny.ToString().ToLower() + " WHERE photo_id = " + photoId.ToString();
             try
             {
@@ -119,7 +111,7 @@ namespace MonitorPhotoApp
             }
             catch (Exception)
             {
-
+                // Just throw here for now..
                 throw;
             }
             finally
@@ -127,8 +119,6 @@ namespace MonitorPhotoApp
                 if (conn != null)
                     conn.Close();
             }
-            
-
         }
     }
     public class ProgressEventArgs : EventArgs
@@ -143,6 +133,7 @@ namespace MonitorPhotoApp
 
     public class PhotoInfo
     {
+        // Class to store downloaded photo properties
         public string URL { get; set; }
         public int ID { get; set; }
 
@@ -152,7 +143,6 @@ namespace MonitorPhotoApp
             this.ID = ID;
             this.IsFunny = IsFunny;
         }
-
     }
 }
 public enum PhotoAttribute
