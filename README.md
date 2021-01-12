@@ -13,7 +13,7 @@ Retrievning:<br/>
 -Location data<br/>
 -Weather data
 
-Shows location on map.
+Shows location on map
 
 
 ## Note
