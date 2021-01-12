@@ -10,12 +10,10 @@ namespace MonitorPhotoApp
     static class Log
     {
         static RichTextBox Logger { get; set; }
-
         public static void InitLogger(RichTextBox logTextBox)
         {
          Logger = logTextBox;
         }
-       
-        static public void AddToLog(string msg) => Logger.Text += $"{msg} {DateTime.UtcNow.ToLongTimeString()}\n";
+        static public void AddToLog(string msg) => Logger.Text += $"{DateTime.UtcNow.ToLongTimeString()} {msg}\n";
     }
 }

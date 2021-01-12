@@ -19,7 +19,6 @@ namespace MonitorPhotoApp
 
 		public Form1()
 		{
-	
 			InitializeComponent();
 			Log.InitLogger(loggerRichTextBox);
 
@@ -29,15 +28,13 @@ namespace MonitorPhotoApp
 			locationWeather = new LocaleData();
 
 			databaseHandler = new DataBaseHandler();
-			// Not necessary to use delegate here
+			// Not necessary to use delegate here, just trying out
 			databaseHandler.OnDatabasIsReady += new DataBaseHandler.StatusUpdateHandler(UpdateAndShowPhotoPanels);
-
 		}
 
      
         private void UpdateAndShowPhotoPanels(object sender, ProgressEventArgs e)
         {
-
 			Log.AddToLog($"We recieved photo attribute \"{e.Attr}\" from databse class. Proof of delegate concept.");
 			// Clear list before filling it up
 			photosListView.Clear();
@@ -63,14 +60,12 @@ namespace MonitorPhotoApp
 				radioButtonNo.Checked = false;
 				radioButtonYes.Checked = false;
 			}
-			
 			// Show relevant panes, should break this out or solve in better way
 			pictureBox1.Visible = true;
 			photosListView.Visible = true;
 			funnyPanel.Visible = true;
 			infoPane.Visible = false;
 			ipPanel.Visible = false;
-
 			// Return cursor to normal icon
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 		}
@@ -103,14 +98,11 @@ namespace MonitorPhotoApp
 				photosListView.Visible = false;
 				funnyPanel.Visible = false;
 				this.Cursor = System.Windows.Forms.Cursors.Default;
-
 			}
-
 
 		}
 		private void PhotoListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
 			// PhotoListView clicked, load corresponding picture into pictureBox
 			List<int> indexes = photosListView.SelectedIndices.Cast<int>().ToList();
 			if (indexes.Count > 0)
@@ -124,9 +116,7 @@ namespace MonitorPhotoApp
                 else {
 					radioButtonNo.Checked = true;
 				}
-
 			}
-
 		}
 		private void IpTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -141,7 +131,6 @@ namespace MonitorPhotoApp
 				TextBox objTextBox = (TextBox)sender;
 				CustomIp(objTextBox.Text);		
 			}
-            
 		}
 			public void IpRichTextBox_Click(object sender, EventArgs e)
 		{
@@ -172,24 +161,20 @@ namespace MonitorPhotoApp
 				// If all succeeded, update gui
 				if (success) UpdateLocationUI();
 				else errMsg = "Only public IP!";
-
 			} 
 			if (!success)
 			{
 				ipTextBox.Text = errMsg;
 				ipTextBox.ForeColor = Color.Red;
 			}
-
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 		}
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
 			localTimeLabelVal.Text = locationWeather.getLocalTime();
-
 		}
 		private void UpdateLocationUI()
 		{
-			
 			// Update map
 			gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(locationWeather._Lat), double.Parse(locationWeather._Lon));
 			gMapControl1.Update();
@@ -233,17 +218,14 @@ namespace MonitorPhotoApp
 				gMapControl1.Update();
 			}
 		}
-
         private void MapZoomOutBtn_Click(object sender, EventArgs e)
         {
 			if (gMapControl1.Zoom > gMapControl1.MinZoom)
 			{
 				gMapControl1.Zoom--;
 				gMapControl1.Update();
-
 			}
 		}
-
 		private void RadioButtons_CheckedChanged(object sender, EventArgs e)
 		{
 			RadioButton radioButton = sender as RadioButton;
@@ -261,7 +243,6 @@ namespace MonitorPhotoApp
 
 			}
 		}
-
         private void GetMyIpBtn_Click(object sender, EventArgs e)
         {
 			// Retrieve public IP of this computer

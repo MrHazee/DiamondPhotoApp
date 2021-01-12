@@ -19,28 +19,21 @@ namespace MonitorPhotoApp
 		public string _TempMax { get; private set; }
 		public string _TempMin { get; private set; }
 		public string _flagIconUrl { get; private set; }
-
-		public string _IP { get; private set; }
-
 		public int _Timezone { get; private set; }
-
 
 		public string _CountryDisplayName { get; private set; }
 		public string _Currency { get; private set; }
 		public string _CurrencySymbol { get; private set; }
 
 		public string _localTime { get; private set; }
-
+		public string _IP { get; private set; }
 		public void FillWeatherProperties()
         {
-			
 			GetWeather(GetLocation(GetIPAddress()));
         }
 		public bool FillWeatherProperties(string ip)
 		{
-           
 				return GetWeather(GetLocation(ip));
-			
 		}
 
 		private bool GetWeather(string city)
@@ -77,8 +70,6 @@ namespace MonitorPhotoApp
 					this._TempMax = Convert.ToString(weatherInfo.Main.Temp_max);
 					this._TempMin = Convert.ToString(weatherInfo.Main.Temp_min);
 					this._Timezone = weatherInfo.Timezone;
-		
-
 				}
 				Log.AddToLog("Done");
 				return true;
@@ -87,7 +78,6 @@ namespace MonitorPhotoApp
             {
 				return false;
             }
-			
 		}
 		private string GetIPAddress()
 		{
@@ -137,14 +127,12 @@ namespace MonitorPhotoApp
 			}
 			catch (Exception e)
 			{
-				
 				Log.AddToLog("Error when retrieving location: " + e.Message);
 				return "";
 			}
 			
 
 		}
-
         internal string getLocalTime()
         {
 

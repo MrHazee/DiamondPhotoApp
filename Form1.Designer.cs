@@ -982,7 +982,7 @@ namespace MonitorPhotoApp
             this.Name = "Form1";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Monitor Photo Shower";
+            this.Text = "The Database Photo Location Weather App";
             this.TransparencyKey = System.Drawing.Color.MediumBlue;
             this.menuPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

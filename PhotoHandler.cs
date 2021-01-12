@@ -10,10 +10,8 @@ namespace MonitorPhotoApp
     {
         public ImageList ImageList { get; private set; }
         private List<Bitmap> BitMapList { get; set; }
-
         public PhotosHandler()
         {
-
             this.ImageList = new ImageList();
             this.ImageList.ImageSize = new Size(56, 56);
             this.ImageList.ColorDepth = ColorDepth.Depth32Bit;
@@ -22,7 +20,6 @@ namespace MonitorPhotoApp
         }
         public ImageList GetImageListFromURLs(List<PhotoInfo> photoInfoList)
         {
-
             this.ImageList.Images.Clear();
             this.BitMapList.Clear();
 
@@ -37,7 +34,6 @@ namespace MonitorPhotoApp
                 this.BitMapList.Add(new Bitmap(Image.FromStream(stream)));
 
             }
-
             return this.ImageList;
         }
 
@@ -69,7 +65,6 @@ namespace MonitorPhotoApp
                     total++;
                 }
             }
-
             //Calculate average
             r /= total;
             g /= total;
