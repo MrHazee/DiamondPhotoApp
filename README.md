@@ -5,12 +5,18 @@ This app is for test purpose only.
 ## Features
 
 Two way communication with PostgreSQL-server
+
 Photo viewer
+
 Average color from photo calculation
  
+
 Retrievning:
+
 -IP-address
+
 -Location data
+
 -Weather data
 
 Shows location on map.
