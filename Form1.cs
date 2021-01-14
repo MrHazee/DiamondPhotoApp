@@ -50,7 +50,7 @@ namespace MonitorPhotoApp
 			{
 				// Select item one in photoListView
 				this.photosListView.Items[0].Selected = true;
-				// Set inte one in photoListView as picture in pictureBox 
+				// Set index one in photoListView as picture in pictureBox 
 				pictureBox1.BackColor = photoControl.GetPicturesAvrColor(0);
 			}
             else
@@ -66,7 +66,7 @@ namespace MonitorPhotoApp
 			funnyPanel.Visible = true;
 			infoPane.Visible = false;
 			ipPanel.Visible = false;
-			// Return cursor to normal icon
+			// Set cursor from loading icon to default icon
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 		}
 		private void MenuBtn_Clicked(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace MonitorPhotoApp
 			if (e.KeyCode == Keys.Enter)
 			{
 				TextBox objTextBox = (TextBox)sender;
-				CustomIp(objTextBox.Text);		
+				GetLocationAnWeatherFromCustomIP(objTextBox.Text);		
 			}
 		}
 			public void IpRichTextBox_Click(object sender, EventArgs e)
@@ -138,9 +138,9 @@ namespace MonitorPhotoApp
 			int cursorPosition = ipRichTextBox.SelectionStart;
 			int lineIndex = ipRichTextBox.GetLineFromCharIndex(cursorPosition);
 			string preDefinedIp = ipRichTextBox.Lines[lineIndex];
-			CustomIp(preDefinedIp);
+			GetLocationAnWeatherFromCustomIP(preDefinedIp);
 		}
-		public void CustomIp(string userIp)
+		public void GetLocationAnWeatherFromCustomIP(string userIp)
         {
 			// Remove whitespace 
 			userIp = userIp.Trim();
@@ -206,6 +206,8 @@ namespace MonitorPhotoApp
 		}
 		private void GMapControl1_Load(object sender, EventArgs e)
         {
+			// Initiate map and do some initial setup
+			// Initiate map and do some initial setup
 			gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;
 			gMapControl1.Zoom = gMapControl1.MaxZoom / 2;
 			gMapControl1.MouseWheelZoomEnabled = true;
